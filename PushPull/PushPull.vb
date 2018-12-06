@@ -37,7 +37,6 @@ Public Class PushPull
         Dim combination As String
         Dim hashedcombination As String
 
-
         username = TextBox1.Text
         password = TextBox2.Text
         combination = TextBox1.Text.ToUpper + TextBox2.Text.ToUpper
@@ -57,21 +56,13 @@ Public Class PushPull
             While reader.Read
                 count = count + 1
             End While
+
+            If count = 1 Then
+            Else
+                MessageBox.Show("Incorrect username or password.")
+            End If
         Catch ex As Exception
 
         End Try
-
-
-
-
-
-
-
-    End Sub
-
-    Private Sub TextBox2_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox2.KeyDown
-        If e.KeyValue = Keys.Enter Then
-
-        End If
     End Sub
 End Class

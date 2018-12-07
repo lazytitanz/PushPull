@@ -48,7 +48,7 @@ Public Class PushPull
         Try
             mysqlconn.Open()
             Dim query As String
-            query = "SELECT * FROM users WHERE username='" & TextBox1.Text & "' and password='" & TextBox2.Text & "' "
+            query = "SELECT * FROM users WHERE username='" & TextBox1.Text & "' and password='" & hashedcombination & "' "
             command = New MySqlCommand(query, mysqlconn)
             reader = command.ExecuteReader
             Dim count As Integer
@@ -58,11 +58,19 @@ Public Class PushPull
             End While
 
             If count = 1 Then
+                MessageBox.Show("Username and password are correct")
+            ElseIf count > 1 Then
+                MessageBox.Show("Username and password are Duplicate")
             Else
-                MessageBox.Show("Incorrect username or password.")
+                MessageBox.Show("Username and password are not correct")
             End If
-        Catch ex As Exception
 
+            mysqlconn.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            mysqlconn.Dispose()
         End Try
     End Sub
 End Class
